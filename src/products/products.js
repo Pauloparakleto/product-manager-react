@@ -1,4 +1,6 @@
 import React, {Component} from "react";
+import Product from "./product";
+import ProductForm from "./product_form";
 
 const api_url = 'http://localhost:3001/products'
 
@@ -25,12 +27,12 @@ class Products extends Component {
     }
 
     render () {
-        console.log(this.state.items)
         return (
             <div>
+                <ProductForm />
                 <ul id='products'>
                     {this.state.items.map((item) => (
-                        <li key={ item.id }>{item.name}</li>
+                        <Product key={item.id} item={item}/>
                     ))}
                 </ul>
             </div>

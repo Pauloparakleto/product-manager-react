@@ -10,6 +10,7 @@ class Products extends Component {
         this.state = {
             items: []
         }
+        this.updateProductsList = this.updateProductsList.bind(this);
     }
 
     componentDidMount(){
@@ -26,10 +27,18 @@ class Products extends Component {
             });
     }
 
+    updateProductsList(item) {
+        let _items = this.state.items;
+        _items.unshift(item)
+        this.setState({
+            items: _items,
+        });
+    }
+
     render () {
         return (
             <div>
-                <ProductForm />
+                <ProductForm api_url={api_url} updateProductsList={this.updateProductsList}/>
                 <ul id='products'>
                     {this.state.items.map((item) => (
                         <Product key={item.id} item={item}/>

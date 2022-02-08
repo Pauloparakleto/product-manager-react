@@ -36,19 +36,16 @@ function Transition(props) {
             aria-describedby="alert-dialog-slide-description"
           >
             <DialogTitle id="alert-dialog-slide-title">
-              {"Use Google's location service?"}
+              {"Alert"}
             </DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-slide-description">
-                The error message
+                {this.props.errorMessage}
               </DialogContentText>
             </DialogContent>
             <DialogActions>
               <Button onClick={this.props.onClick} color="primary">
-                Disagree
-              </Button>
-              <Button onClick={this.props.onClick} color="primary">
-                Agree
+                Got it
               </Button>
             </DialogActions>
           </Dialog>

@@ -12,6 +12,7 @@ class Products extends Component {
         this.state = {
             items: [],
             hasAlertMessage: false,
+            errors: [],
         }
         this.updateProductsList = this.updateProductsList.bind(this);
     }
@@ -36,21 +37,22 @@ class Products extends Component {
         })
     }
 
-    showFlashMessage(items){
+    showFlashMessage(){
         if(this.state.hasAlertMessage === true ){
-            return <AlertDialogSlide onClick={() => this.closeFlashMessage()}/>;
+            return <AlertDialogSlide errorMessage={this.state.errors} onClick={() => this.closeFlashMessage()}/>;
         };   
     }
 
-    updateProductsList(item) {
-        if(item.errors.length >= 1){
+    updateProductsList(response) {
+        if(response.errors.length >= 1){
             return this.setState({
                 hasAlertMessage: true,
+                errors: response.errors,
             });
         }
 
         let _items = this.state.items;
-        _items.unshift(item)
+        _items.unshift(response)
         this.setState({
             items: _items,
         });

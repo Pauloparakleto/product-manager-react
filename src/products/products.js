@@ -31,12 +31,14 @@ class Products extends Component {
     }
 
     closeFlashMessage(){
-        
+        this.setState({
+            hasAlertMessage: false,
+        })
     }
 
     showFlashMessage(items){
         if(this.state.hasAlertMessage === true ){
-            return <AlertDialogSlide />;
+            return <AlertDialogSlide onClick={() => this.closeFlashMessage()}/>;
         };   
     }
 

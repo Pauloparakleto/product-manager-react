@@ -49,6 +49,7 @@ class ProductForm extends Component {
                         variant="outlined"
                         type="text"
                         name="product[name]"
+                        required="true"
                         onChange={this.handleProductChange} 
                     />
 
@@ -58,6 +59,7 @@ class ProductForm extends Component {
                         variant="outlined"
                         type="text"
                         name="product[description]"
+                        required="true"
                         onChange={this.handleProductChange}
                     />
 
@@ -67,6 +69,7 @@ class ProductForm extends Component {
                         variant="outlined"
                         type="decimal"
                         name="product[price]"
+                        required="true"
                         onChange={this.handleProductChange}
                     />
 
@@ -76,6 +79,7 @@ class ProductForm extends Component {
                         variant="outlined"
                         type="number"
                         name="product[quantity]"
+                        required="true"
                         onChange={this.handleProductChange}
                     />
                     <Button variant="contained"

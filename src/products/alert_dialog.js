@@ -44,10 +44,10 @@ function Transition(props) {
               </DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button onClick={this.props.closeFlashMessage} color="primary">
+              <Button onClick={this.props.onClick} color="primary">
                 Disagree
               </Button>
-              <Button onClick={this.handleClose} color="primary">
+              <Button onClick={this.props.onClick} color="primary">
                 Agree
               </Button>
             </DialogActions>

@@ -22,7 +22,7 @@ class Products extends Component {
             .then(response => response.json())
             .then(response_items => {
                 this.setState({
-                    items: response_items.reverse()
+                    items: response_items
                 })
             });
     }

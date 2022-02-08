@@ -44,12 +44,40 @@ class ProductForm extends Component {
 
 
                     <TextField
-                        id="product_input"
-                        label="product Description"
+                        id="product_input_name"
+                        label="Product Name"
                         variant="outlined"
                         type="text"
                         name="product[name]"
-                        onChange={this.handleProductChange} />
+                        onChange={this.handleProductChange} 
+                    />
+
+                    <TextField
+                        id="product_input_description"
+                        label="Product Description"
+                        variant="outlined"
+                        type="text"
+                        name="product[description]"
+                        onChange={this.handleProductChange}
+                    />
+
+                    <TextField
+                        id="product_input_price"
+                        label="Product Price"
+                        variant="outlined"
+                        type="decimal"
+                        name="product[price]"
+                        onChange={this.handleProductChange}
+                    />
+
+                    <TextField
+                        id="product_input_quantity"
+                        label="Product Quantity"
+                        variant="outlined"
+                        type="number"
+                        name="product[quantity]"
+                        onChange={this.handleProductChange}
+                    />
                     <Button variant="contained"
                         color="primary"
                         type="submit">Add Product</Button>

@@ -4,7 +4,7 @@ import Product from "./product";
 import ProductForm from "./product_form";
 
 
-const api_url = 'http://localhost:3001/products'
+const api_url =  process.env.REACT_APP_DATABASE_URL + '/products'
 
 class Products extends Component {
     constructor(props){

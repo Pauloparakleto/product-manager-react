@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import AlertDialogSlide from "./alert_dialog";
 import Product from "./product";
 import ProductForm from "./product_form";
+import AlertDialog from "./product_detail";
 
 
 const api_url =  process.env.REACT_APP_DATABASE_URL + '/products'
@@ -13,6 +14,8 @@ class Products extends Component {
             items: [],
             hasAlertMessage: false,
             errors: [],
+            isProductDetailShow: false,
+            productDetail: [],
         }
         this.updateProductsList = this.updateProductsList.bind(this);
     }
@@ -43,25 +46,33 @@ class Products extends Component {
         };   
     }
 
+    showProductDetail(){
+        console.log('product detail');
+        console.log(this.state.productDetail);
+    }
+
     updateProductsList(response) {
-        if(response.errors.length >= 1){
+        if(response.hasOwnProperty("errors")){
             return this.setState({
                 hasAlertMessage: true,
                 errors: response.errors,
             });
-        }
-
-        let _items = this.state.items;
-        _items.unshift(response)
-        this.setState({
+        } else {
+            let _items = this.state.items;
+             _items.unshift(response)
+            this.setState({
             items: _items,
+            isProductDetailShow: true,
+            productDetail: response,
         });
+        }
     }
 
     render () {
         return (
             <div>
                 {this.showFlashMessage()}
+                {this.showProductDetail(this.state.productDetail)}
                 <ProductForm api_url={api_url} updateProductsList={this.updateProductsList}/>
                 <ul id='products'>
                     {this.state.items.map((item) => (

@@ -8,7 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 class AlertDialog extends React.Component {
   state = {
-    open: false,
+    open: true,
   };
 
   handleClickOpen = () => {
@@ -22,9 +22,6 @@ class AlertDialog extends React.Component {
   render() {
     return (
       <div>
-        <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
-          Open alert dialog
-        </Button>
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}

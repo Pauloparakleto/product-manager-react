@@ -47,8 +47,10 @@ class Products extends Component {
     }
 
     showProductDetail(){
-        console.log('product detail');
-        console.log(this.state.productDetail);
+        if(this.state.isProductDetailShow === true ){
+            
+            return <AlertDialog />;
+        };   
     }
 
     updateProductsList(response) {

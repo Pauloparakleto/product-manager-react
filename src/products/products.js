@@ -55,7 +55,7 @@ class Products extends Component {
     showProductDetail(){
         if(this.state.isProductDetailShow === true ){
             
-            return <AlertDialog onClick={() => this.closeProductDetail()}/>;
+            return <AlertDialog productDetail={this.state.productDetail} onClick={() => this.closeProductDetail()}/>;
         };   
     }
 

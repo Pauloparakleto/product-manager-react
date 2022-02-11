@@ -40,6 +40,12 @@ class Products extends Component {
         })
     }
 
+    closeProductDetail(){
+        this.setState({
+            isProductDetailShow: false,
+        })
+    }
+
     showFlashMessage(){
         if(this.state.hasAlertMessage === true ){
             return <AlertDialogSlide errorMessage={this.state.errors} onClick={() => this.closeFlashMessage()}/>;
@@ -49,7 +55,7 @@ class Products extends Component {
     showProductDetail(){
         if(this.state.isProductDetailShow === true ){
             
-            return <AlertDialog />;
+            return <AlertDialog onClick={() => this.closeProductDetail()}/>;
         };   
     }
 

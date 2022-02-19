@@ -18,6 +18,7 @@ class Products extends Component {
             productDetail: [],
         }
         this.updateProductsList = this.updateProductsList.bind(this);
+        this.deleteProduct = this.deleteProduct.bind(this);
     }
 
     componentDidMount(){
@@ -76,6 +77,20 @@ class Products extends Component {
         }
     }
 
+    deleteProduct(item){
+        let delete_URL = api_url + `/${item.id}`
+        fetch(delete_URL, {
+            method: "DELETE"
+        }).then(() => {
+            let _items = this.state.items;
+            let index = _items.indexOf(item);
+            _items.splice(index, 1);
+            this.setState({
+                items: _items
+            })
+        })
+    }
+
     render () {
         return (
             <div>
@@ -84,7 +99,7 @@ class Products extends Component {
                 <ProductForm api_url={api_url} updateProductsList={this.updateProductsList}/>
                 <ul id='products'>
                     {this.state.items.map((item) => (
-                        <Product key={item.id} item={item}/>
+                        <Product key={item.id} item={item} deleteProduct={this.deleteProduct}/>
                     ))}
                 </ul>
             </div>

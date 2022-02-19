@@ -15,13 +15,20 @@ const useStyle = makeStyles({
 
 export default function Product(props){
     const classes = useStyle();
+    function handleDelete(){
+        props.deleteProduct(props.item)
+    };
+
     return (
         <Grid container spacing={0}>
             <Grid item xs={9}>
                 <Paper elevation={3} className={classes.root}>
                     {props.item.name}
                     <hr/>
-                    <Button variant="contained" color="secondary">
+                    <Button 
+                        variant="contained"
+                        color="secondary"
+                        onClick={handleDelete}>
                         Delete
                         <DeleteIcon className={classes.rightIcon} />
                     </Button>

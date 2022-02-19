@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import AlertDialogSlide from "./alert_dialog";
 import Product from "./product";
 import ProductForm from "./product_form";
+import AlertDialog from "./product_detail";
 
 
 const api_url =  process.env.REACT_APP_DATABASE_URL + '/products'
@@ -13,8 +14,11 @@ class Products extends Component {
             items: [],
             hasAlertMessage: false,
             errors: [],
+            isProductDetailShow: false,
+            productDetail: [],
         }
         this.updateProductsList = this.updateProductsList.bind(this);
+        this.deleteProduct = this.deleteProduct.bind(this);
     }
 
     componentDidMount(){
@@ -37,35 +41,65 @@ class Products extends Component {
         })
     }
 
+    closeProductDetail(){
+        this.setState({
+            isProductDetailShow: false,
+        })
+    }
+
     showFlashMessage(){
         if(this.state.hasAlertMessage === true ){
             return <AlertDialogSlide errorMessage={this.state.errors} onClick={() => this.closeFlashMessage()}/>;
         };   
     }
 
+    showProductDetail(){
+        if(this.state.isProductDetailShow === true ){
+            
+            return <AlertDialog productDetail={this.state.productDetail} onClick={() => this.closeProductDetail()}/>;
+        };   
+    }
+
     updateProductsList(response) {
-        if(response.errors.length >= 1){
+        if(response.hasOwnProperty("errors")){
             return this.setState({
                 hasAlertMessage: true,
                 errors: response.errors,
             });
-        }
-
-        let _items = this.state.items;
-        _items.unshift(response)
-        this.setState({
+        } else {
+            let _items = this.state.items;
+             _items.unshift(response)
+            this.setState({
             items: _items,
+            isProductDetailShow: true,
+            productDetail: response,
         });
+        }
+    }
+
+    deleteProduct(item){
+        let delete_URL = api_url + `/${item.id}`
+        fetch(delete_URL, {
+            method: "DELETE"
+        }).then(() => {
+            let _items = this.state.items;
+            let index = _items.indexOf(item);
+            _items.splice(index, 1);
+            this.setState({
+                items: _items
+            })
+        })
     }
 
     render () {
         return (
             <div>
                 {this.showFlashMessage()}
+                {this.showProductDetail(this.state.productDetail)}
                 <ProductForm api_url={api_url} updateProductsList={this.updateProductsList}/>
                 <ul id='products'>
                     {this.state.items.map((item) => (
-                        <Product key={item.id} item={item}/>
+                        <Product key={item.id} item={item} deleteProduct={this.deleteProduct}/>
                     ))}
                 </ul>
             </div>
